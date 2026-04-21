@@ -17,7 +17,11 @@ export default defineConfig({
   testDir: "./tests",
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
+  // Always retry once. OpenRouter occasionally rate-limits gemini-2.5-flash
+  // on wait-condition checks, returning a malformed JSON stream. One retry
+  // absorbs those transient gateway events without letting them surface as
+  // spurious spec failures.
+  retries: 1,
   // Gov portals are likely behind Cloudflare/WAF. Serial across tests keeps
   // us polite and avoids rate-limit-driven flakiness during the hackathon run.
   workers: 1,
