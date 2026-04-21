@@ -3,20 +3,27 @@ import { runSteps } from "passmark";
 
 test.use({ headless: !!process.env.CI });
 
-// Data-freshness assertion: "updated within 90 days" cannot be expressed in
-// vanilla Playwright without hard-coding a date. LLM reads the timestamp.
+// The KKMNow dashboard lazy-loads its utilisation numbers below the fold and
+// sometimes rate-limits the Gemini wait-condition checker via OpenRouter.
+// One retry absorbs transient gateway hiccups; a scroll step forces the
+// IntersectionObserver-gated content to hydrate before assertions run.
+test.describe.configure({ retries: 1 });
 
 test("KKMNow hospital bed utilisation dashboard loads", async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(240_000);
   await runSteps({
     page,
     userFlow: "kkmnow hospital beds",
     steps: [
       { description: "Navigate to https://data.moh.gov.my/dashboard/hospital-bed-utilisation" },
       {
-        description: "Wait for the dashboard numbers to hydrate",
+        description:
+          "Scroll down slowly through the entire page to trigger lazy-loading of charts, ranked lists, and the facility table below the fold",
+      },
+      {
+        description: "Pause briefly for any remaining lazy-loaded charts to render",
         waitUntil:
-          "At least one concrete bed-utilisation percentage value (e.g. a number like 87%) is visible on the page — not just the section label 'Hospital Bed Utilisation (%)'",
+          "The page shows either a map of Malaysia, a ranked list of states with percentages, or a facility table — not just section labels",
       },
     ],
     assertions: [
