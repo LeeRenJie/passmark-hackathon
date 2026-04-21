@@ -1,0 +1,25 @@
+{
+  "name": "hackathon-tests",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:smoke": "playwright test tests/smoke",
+    "test:data-gov-my": "playwright test tests/data-gov-my",
+    "test:dosm": "playwright test tests/dosm",
+    "test:kkmnow": "playwright test tests/kkmnow",
+    "test:clean": "playwright test --workers=1",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.0",
+    "@types/node": "^22.13.10",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "passmark": "^1.0.8"
+  }
+}
