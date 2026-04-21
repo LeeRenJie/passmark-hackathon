@@ -14,7 +14,7 @@ The tests here never read a DOM selector. Every assertion is a natural-language,
 
 ## Test coverage
 
-11 specs, 13 tests total, covering:
+13 specs, 14 tests total, covering:
 
 | # | Spec | What it proves |
 |---|---|---|
@@ -22,14 +22,15 @@ The tests here never read a DOM selector. Every assertion is a natural-language,
 | 2 | `data-gov-my/catalogue-search` | Search relevance + frequency-filter correctness (2 tests) |
 | 3 | `data-gov-my/dataset-detail` | Metadata + download formats + API snippet |
 | 4 | `data-gov-my/dashboard-population` | **Range-bounded KPI** — 20M < total population < 40M |
-| 5 | `data-gov-my/dashboard-kawasanku` | State drill-down changes view (Malaysia → Selangor) |
-| 6 | `data-gov-my/language-toggle` | Bahasa Malaysia / English locale swap |
-| 7 | `data-gov-my/api-ui-parity` | UI dataset count matches public catalogue API |
-| 8 | `data-gov-my/api-docs` | Developer portal has working examples |
-| 9 | `data-gov-my/mobile-responsive` | No horizontal scroll on iPhone viewport |
-| 10 | `dosm/opendosm-inflation` | CPI range check (-3% to 15%) + trend chart + category breakdown |
-| 11 | `kkmnow/hospital-utilisation` | Bed-utilisation percentages 0-120% + data freshness |
-| 12 | `smoke/quickstart` | Passmark canonical example against `demo.vercel.store` |
+| 5 | `data-gov-my/cross-field-math` | **Cross-field math** — male + female ≈ total within 5%; percentage breakdowns sum to ~100% |
+| 6 | `data-gov-my/dashboard-kawasanku` | State drill-down changes view (Malaysia → Selangor) |
+| 7 | `data-gov-my/language-toggle` | Bahasa Malaysia / English locale swap |
+| 8 | `data-gov-my/api-ui-parity` | UI dataset count matches public catalogue API |
+| 9 | `data-gov-my/api-docs` | Developer portal has working examples |
+| 10 | `data-gov-my/mobile-responsive` | No horizontal scroll on iPhone viewport |
+| 11 | `dosm/opendosm-inflation` | CPI range check (-3% to 15%) + trend chart + category breakdown |
+| 12 | `kkmnow/hospital-utilisation` | Bed-utilisation percentages 0-120% + data freshness |
+| 13 | `smoke/quickstart` | Passmark canonical example against `demo.vercel.store` |
 
 Every assertion is semantic, not structural. None of them reference a CSS class, `data-testid`, or DOM path.
 
@@ -118,7 +119,7 @@ See `playwright.config.ts` for the `configure({ ai: { gateway: "openrouter" } })
 ├── playwright.config.ts       # Passmark + dotenv wiring, serial worker setup
 ├── tests/
 │   ├── smoke/                 # Canonical Passmark README example
-│   ├── data-gov-my/           # 9 specs against MAMPU's portal
+│   ├── data-gov-my/           # 10 specs against MAMPU's portal
 │   ├── dosm/                  # 1 spec against OpenDOSM (inflation)
 │   └── kkmnow/                # 1 spec against KKMNow (bed utilisation)
 ├── scripts/
